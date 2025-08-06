@@ -1,0 +1,167 @@
+---
+# For configuration options and examples, please see:
+# https://gethomepage.dev/latest/configs/services
+
+#- greeting:
+#    text_size: 4xl
+#    text: debian.serwer
+#- Kalendarz:
+#    widget:
+#        type: calendar
+- home.serwer:
+    - "":
+        description: "Debian GNU/Linux 12 (bookworm) x86_64"
+        ping: ${HOMEPAGE_VAR_SERVER_IP}
+    #- "":
+    #- "":
+       # widget:
+        #    type: coinmarketcap
+         #   currency: PLN # Set the currency to Polish Zloty
+          #  symbols: [BTC, ETH] # Example cryptocurrencies
+           # key: ${HOMEPAGE_VAR_COINMARKETCAP_API_KEY} # Your CoinMarketCap API key
+   # - "":
+   #     widget:
+   #         type: calendar
+
+- Usługi:    
+    - Portainer:
+        icon: portainer #portainer.svg
+        href:  "{{HOMEPAGE_VAR_PORTAINER_URL}}" 
+        description: docker
+        #server: debian.serwer
+        #container: Portainer
+        siteMonitor: "{{HOMEPAGE_VAR_PORTAINER_URL}}"
+        statusStyle: 'dot'
+        widget:
+            type: portainer
+            url:  "{{HOMEPAGE_VAR_PORTAINER_URL}}" 
+            env: 2
+            key:  "{{HOMEPAGE_VAR_PORTAINER_API_KEY}}" 
+    - piHole:
+        icon: pi-hole.svg
+        href:  "{{HOMEPAGE_VAR_PIHOLE_URL_2}}" 
+        description: dns
+        siteMonitor: "{{HOMEPAGE_VAR_PIHOLE_URL_1}}"
+        statusStyle: 'dot'  
+        widget:
+            type: pihole
+            url:  "http://pihole.kcn.lan/" 
+            version: 6 # required if running v6 or higher, defaults to 5
+            key:  "{{HOMEPAGE_VAR_PIHOLE_API_KEY_1}}"  
+    - Uptime Kuma:
+        icon: uptime-kuma.svg
+        href:  "{{HOMEPAGE_VAR_UPTIME_KUMA_URL_2}}" 
+        description: status serwera
+        siteMonitor: "{{HOMEPAGE_VAR_UPTIME_KUMA_URL}}"
+        statusStyle: 'dot'
+        #widget:
+        #   type: uptimekuma
+        #   url:  "{{HOMEPAGE_VAR_UPTIME_KUMA_URL}}"
+        #   slug: kcn
+    - Nginx:
+        icon: nginx-proxy-manager.svg
+        href: "{{HOMEPAGE_VAR_NGINX_URL}}"
+        description: proxy manager
+        siteMonitor: "{{HOMEPAGE_VAR_NGINX_URL}}"
+        statusStyle: 'dot'
+- Media:
+     - Trilium:
+         icon: trilium
+         href: "{{HOMEPAGE_VAR_TRILIUM_URL}}"
+         description: notes
+         ping: "{{HOMEPAGE_VAR_TRILIUM_URL}}"
+         statusStyle: 'dot'
+        # widget:
+        #    type: trilium
+        #    url: "{{HOMEPAGE_VAR_TRILIUM_URL}}"
+        #    key: "{{HOMEPAGE_VAR_TRILIUM_KEY}}"
+     - Gitea:
+         icon: gitea
+         href: "{{HOMEPAGE_VAR_GITEA_URL}}"
+         description: git
+         ping: "{{HOMEPAGE_VAR_GITEA_URL}}"
+         statusStyle: 'dot'
+     - qBittorrent:
+         icon: qbittorrent.svg
+         href: "{{HOMEPAGE_VAR_QBITT_URL}}"
+         description: torrent client
+         ping: "{{HOMEPAGE_VAR_QBITT_URL}}"
+         statusStyle: 'dot'
+         widget:
+             type: qbittorrent
+             hideErrors: true
+             url: "{{HOMEPAGE_VAR_QBITT_URL}}"
+             username: "{{HOMEPAGE_VAR_QBITT_USERNAME}}"
+             password: "{{HOMEPAGE_VAR_QBITT_PASSWORD}}"
+
+
+     #- Jellyfin:
+       # icon: jellyfin.svg
+       # href: "{{HOMEPAGE_VAR_JELLYFIN_URL}}"
+        #disciption: media center
+        #ping: "{{HOMEPAGE_VAR_JELLYFIN_URL}}"
+        #statusStyle: 'dot'
+        #widget: 
+         #   hideErrors: true
+         #   type: jellyfin
+         #   url: "{{HOMEPAGE_VAR_JELLYFIN_URL}}"
+         #   key:
+         #   enableBlocks: true # optional, defaults to false
+         #   enableNowPlaying: true # optional, defaults to true
+             
+- Sieć:
+    - UniFi Network:
+        icon: unifi
+        href: "{{HOMEPAGE_VAR_ROUTER_URL}}"
+        description: Cloud Gateway
+        ping: "{{HOMEPAGE_VAR_ROUTER_URL}}"
+        #widget:
+         #   type: unifi
+         #   url: "{{HOMEPAGE_VAR_ROUTER_URL}}"
+            #site: default
+         #   username: homepage
+         #   password: "{{HOMEPAGE_VAR_UNIFY_PASS}}"
+         #   verify_ssl: false
+         #   refreshInterval: 30
+         #   fields:
+          #     - "wan_ip"
+                #- "wlan"
+                #- "lan"
+                #- "lan_users"
+                #- lan_status
+                #- wlan_status
+                #- num_clients
+                #- num_ap
+                #- num_switch
+                #- num_gateway
+                #- uptime
+        #statusStyle: 'dot'
+    
+    - Kamera:
+        icon: /icons/camera2.png
+        href: "{{HOMEPAGE_VAR_CAMERA_URL}}"
+        description: HikVision
+        ping: "{{HOMEPAGE_VAR_CAMERA_URL}}"
+
+- "| kCn ~":
+    - kcn333.pl:
+        icon: /icons/www2.svg
+        href: https://kcn333.pl/
+       # description: Homepage
+        ping: https://kcn333.pl/
+        #statusStyle: 'dot' 
+    - gitHub:
+        icon: /icons/github.svg
+        href: https://github.com/kCn3333
+        #siteMonitor: https://github.com/kCn3333
+        #statusStyle: 'dot'
+    - nextCloud:
+        icon: nextcloud #owncloud.svg
+        href: ${HOMEPAGE_VAR_CLOUD_URL}
+        ping: ${HOMEPAGE_VAR_CLOUD_URL}
+        #statusStyle: 'dot'
+    - cloudFlare:
+        icon: cloudflare.svg
+        href: https://dash.cloudflare.com/login
+        #siteMonitor: https://cloudflare.com/
+        #statusStyle: 'dot' 

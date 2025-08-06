@@ -1,0 +1,45 @@
+---
+# For configuration options and examples, please see:
+# https://gethomepage.dev/latest/configs/service-widgets
+- logo:
+    icon: /icons/im2.gif # optional
+
+- resources:
+    label: System
+    cpu: true
+    cputemp: true
+- resources:
+    label: Up
+    uptime: true
+- resources:
+    label: Pamięć
+    memory: true
+    refresh: 3000
+    disk: /
+    
+- unifi_console:
+    url: "{{HOMEPAGE_VAR_ROUTER_URL}}"
+    #site: Site Name # optional
+    username: homepage
+    password: "{{HOMEPAGE_VAR_UNIFY_PASS}}"
+    verify_ssl: false
+
+#- search:
+#    provider: duckduckgo
+#    target: _blank
+- datetime:
+    text_size: md
+    locale: pl
+    format:
+       dateStyle: short
+       timeStyle: long
+
+- openweathermap:
+    label: Kraków #optional
+    latitude: 50.0614300
+    longitude: 19.9365800
+    units: metric # or imperial
+    provider: openweathermap
+    apiKey: "{{HOMEPAGE_VAR_WEATHER_KEY}}"
+    cache: 45
+

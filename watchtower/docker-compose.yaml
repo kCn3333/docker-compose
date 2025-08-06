@@ -1,0 +1,18 @@
+services:
+  watchtower:
+    image: containrrr/watchtower:latest
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    environment:
+      WATCHTOWER_SCHEDULE: "0 0 4 * * *"
+      WATCHTOWER_CLEANUP: true
+      WATCHTOWER_MONITOR_ONLY: false
+      WATCHTOWER_NOTIFICATIONS: shoutrrr
+      WATCHTOWER_NOTIFICATION_URL: ${WATCHTOWER_NOTIFICATION_URL}
+    restart: unless-stopped
+    networks:
+      pihole_internal:
+        ipv4_address: 172.70.9.4
+networks:
+  pihole_internal:
+    external: true

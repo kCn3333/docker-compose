@@ -1,0 +1,24 @@
+
+
+services:
+  trilium:
+    image: triliumnext/notes:latest
+    container_name: trilium_notes
+    restart: unless-stopped
+    ports:
+      - "8880:8080"
+    volumes:
+      - /home/kcn/trilium_notes:/home/node/trilium-data
+    environment:
+      - TRILIUM_DATA_DIR=/home/node/trilium-data
+      #- NODE_OPTIONS=--dns-result-order=ipv4first
+      #- TRILIUM_REQUEST_TIMEOUT=15000
+      #- TRILIUM_OAUTH_BASE_URL=${NOTES_URL}
+      #- TRILIUM_OAUTH_ISSUER_BASE_URL=https://auth.kcn333.pl/application/o/notes/.well-known/openid-configuration
+      #- TRILIUM_OAUTH_ISSUER_NAME=Authentik
+      #- TRILIUM_OAUTH_ISSUER_ICON=https://tse3.mm.bing.net/th/id/OIP.olJhlVn4jAh3Mf9S6rPgHwAAAA?rs=1&pid=ImgDetMain&o=7&rm=3
+      #- TRILIUM_OAUTH_CLIENT_ID=${OAUTH_CLIENT_ID}
+      #- TRILIUM_OAUTH_CLIENT_SECRET=${OAUTH_CLIENT_SECRET}
+   # dns:
+      #- 1.1.1.1
+
