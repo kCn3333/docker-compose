@@ -1,3 +1,5 @@
+version: "3.8"
+
 services:
   vaultwarden:
     image: vaultwarden/server:latest
@@ -6,6 +8,6 @@ services:
     environment:
       DOMAIN: ${DOMAIN:-example.com}
     volumes:
-      - ./vw-data/:/data/
+      - /home/kcn/docker/vaultwarden/data:/data
     ports:
       - 81:80

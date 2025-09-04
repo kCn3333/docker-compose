@@ -1,14 +1,11 @@
 
-volumes:
-    uptimekuma:
-
 services:
   uptime-kuma:
     image: louislam/uptime-kuma
     container_name: uptime-kuma
 
     volumes:
-      - uptimekuma:/app/data
+      - /home/kcn/docker/uptime-kuma/data:/app/data
       - /var/run/docker.sock:/var/run/docker.sock
     networks:
       pihole_internal:

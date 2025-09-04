@@ -22,7 +22,7 @@ services:
     environment:
       - CLOUDFLARE_API_TOKEN=$TOKEN
         # Your Cloudflare API token
-      - DOMAINS=kcn333.pl
+      - DOMAINS=example.com
         # Your domains (separated by commas)
       - PROXIED=true
         # Tell Cloudflare to cache webpages and hide your IP (optional)

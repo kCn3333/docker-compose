@@ -4,9 +4,9 @@ services:
     image: ghcr.io/ajnart/homarr:latest
     restart: unless-stopped
     volumes:
-      - /var/run/docker.sock:/var/run/docker.sock # Optional, only if you want docker integration
-      - ./homarr/configs:/app/data/configs
-      - ./homarr/icons:/app/public/icons
-      - ./homarr/data:/data
+      - /var/run/docker.sock:/var/run/docker.sock   # Optional, only if you want docker integration
+      - /home/kcn/docker/homarr/configs:/app/data/configs
+      - /home/kcn/docker/homarr/icons:/app/public/icons
+      - /home/kcn/docker/homarr/data:/data
     ports:
       - '7585:7575'

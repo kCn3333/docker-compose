@@ -9,7 +9,7 @@ services:
       PASV_ADDRESS: ${FTP_IP}
       PASV_PORT_RANGE: 22000-22010
     volumes:
-      - "/ftp:/home/vsftpd/ftpuser"
+      - "/home/kcn/docker/ftp/:/home/vsftpd/ftpuser"
 
 networks:
   mynetwork:

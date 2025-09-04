@@ -16,9 +16,9 @@ services:
 
 
     volumes:
-      - /home/kcn/homepage/config:/app/config               # Make sure your local config directory exists
-      - /home/kcn/homepage/images:/app/public/images        # for background image
-      - /home/kcn/homepage/icons:/app/public/icons          # for some icons
+      - /home/kcn/docker/homepage/config:/app/config               # Make sure your local config directory exists
+      - /home/kcn/docker/homepage/images:/app/public/images        # for background image
+      - /home/kcn/docker/homepage/icons:/app/public/icons          # for some icons
       - /var/run/docker.sock:/var/run/docker.sock:ro        # optional, for docker integrations
     restart: unless-stopped
 

@@ -8,7 +8,7 @@ services:
       - TZ=Etc/UTC
       - JELLYFIN_PublishedServerUrl=${JELLYFIN_URL} #optional
     volumes:
-      - /media/kcn/media:/config
+      - /home/kcn/jellyfin/config:/config
       - /media/kcn/media:/data/tvshows
       - /media/kcn/media:/data/movies
     ports:

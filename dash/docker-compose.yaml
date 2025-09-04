@@ -6,4 +6,4 @@ services:
     ports:
       - '83:3003'
     volumes:
-      - /:/mnt/host:ro
+      - /home/kcn/docker/dash/:/mnt/host:ro

@@ -10,9 +10,9 @@ services:
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
       POSTGRES_DB: ${POSTGRES_DB}
     ports:
-      - "5432:5432"   # Otwórz port 5432 na hoście
+      - "5432:5432" 
     volumes:
-      - postgres_data:/var/lib/postgresql/data
+      - /home/kcn/docker/postgres/data:/var/lib/postgresql/data
     networks:
       - my_network
 
@@ -24,7 +24,7 @@ services:
       PGADMIN_DEFAULT_EMAIL: ${PGADMIN_DEFAULT_EMAIL}
       PGADMIN_DEFAULT_PASSWORD: ${PGADMIN_DEFAULT_PASSWORD}
     ports:
-      - "5050:80"     # Otwórz port 5050 na hoście
+      - "5050:80"
     networks:
       - my_network
     depends_on:
@@ -32,8 +32,9 @@ services:
 
 networks:
   my_network:
-    driver: bridge  # Używamy standardowej sieci bridge
+    driver: bridge
 
 volumes:
   postgres_data:
     driver: local
+

@@ -11,10 +11,10 @@ services:
     command: --transaction-isolation=READ-COMMITTED --binlog-format=ROW --innodb-file-per-table=1 --skip-innodb-read-only-compressed
 
     volumes:
-      - db:/var/lib/mysql
+      - /home/kcn/docker/nextcloud/db_data:/var/lib/mysql
     environment:
-      - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD} #change this
-      - MYSQL_PASSWORD=0${MYSQL_PASSWORD} #change this
+      - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
+      - MYSQL_PASSWORD=${MYSQL_PASSWORD}
       - MYSQL_DATABASE=nextcloud
       - MYSQL_USER=nextcloud
 
@@ -26,9 +26,9 @@ services:
     links:
       - db
     volumes:
-      - nextcloud:/var/www/html
+      - /home/kcn/docker/nextcloud/data:/var/www/html
     environment:
-      - MYSQL_PASSWORD=${MYSQL_PASSWORD}  #change this to match the mysql_password above
+      - MYSQL_PASSWORD=${MYSQL_PASSWORD}
       - MYSQL_DATABASE=nextcloud
       - MYSQL_USER=nextcloud
       - MYSQL_HOST=db
