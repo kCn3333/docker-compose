@@ -10,9 +10,3 @@ services:
       WATCHTOWER_NOTIFICATIONS: shoutrrr
       WATCHTOWER_NOTIFICATION_URL: ${WATCHTOWER_NOTIFICATION_URL}
     restart: unless-stopped
-    networks:
-      pihole_internal:
-        ipv4_address: 172.70.9.4
-networks:
-  pihole_internal:
-    external: true

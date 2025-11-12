@@ -2,10 +2,6 @@ services:
   homepage:
     image: ghcr.io/gethomepage/homepage:latest
     container_name: homepage
-    networks:
-      pihole_internal:
-        ipv4_address: 172.70.9.10
-
     ports:
       - 3000:3000
     env_file: stack.env  # use .env
@@ -14,14 +10,9 @@ services:
       PGID: $PGID   # read them from .env
       HOMEPAGE_ALLOWED_HOSTS: home.kcn.lan
 
-
     volumes:
       - /home/kcn/docker/homepage/config:/app/config               # Make sure your local config directory exists
       - /home/kcn/docker/homepage/images:/app/public/images        # for background image
       - /home/kcn/docker/homepage/icons:/app/public/icons          # for some icons
       - /var/run/docker.sock:/var/run/docker.sock:ro        # optional, for docker integrations
     restart: unless-stopped
-
-networks:
-  pihole_internal:
-    external: true

@@ -7,13 +7,6 @@ services:
     volumes:
       - /home/kcn/docker/uptime-kuma/data:/app/data
       - /var/run/docker.sock:/var/run/docker.sock
-    networks:
-      pihole_internal:
-        ipv4_address: 172.70.9.7
     ports:
       - 3002:3001
     restart: unless-stopped
-
-networks:
-  pihole_internal:
-    external: true
