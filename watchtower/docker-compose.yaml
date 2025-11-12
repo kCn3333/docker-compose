@@ -1,10 +1,10 @@
 services:
   watchtower:
-    image: containrrr/watchtower:latest
+    image: nickfedor/watchtower:latest
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
     environment:
-      WATCHTOWER_SCHEDULE: "0 0 4 * * *"
+      WATCHTOWER_SCHEDULE: "0 0 3 * * *"
       WATCHTOWER_CLEANUP: true
       WATCHTOWER_MONITOR_ONLY: false
       WATCHTOWER_NOTIFICATIONS: shoutrrr

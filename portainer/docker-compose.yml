@@ -1,0 +1,14 @@
+
+services:
+  portainer:
+    image: portainer/portainer-ce:latest
+    container_name: portainer
+    restart: always
+    ports:
+      - "9443:9443"
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - /home/kcn/docker/portainer/data:/data
+    environment:
+      - PUID=995  # Zastąp swoim UID
+      - PGID=995  # Zastąp swoim GID
