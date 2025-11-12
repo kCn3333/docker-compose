@@ -9,6 +9,3 @@ services:
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
       - /home/kcn/docker/portainer/data:/data
-    environment:
-      - PUID=995  # Zastąp swoim UID
-      - PGID=995  # Zastąp swoim GID
