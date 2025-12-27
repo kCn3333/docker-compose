@@ -10,15 +10,15 @@
 #        type: calendar
 - home.serwer:
     - "":
-        description: "Debian GNU/Linux 12 (bookworm) x86_64"
-        ping: ${HOMEPAGE_VAR_SERVER_IP}
+        description: "Debian GNU/Linux 13 (trixie) x86_64"
+        ping: 192.168.0.46
     #- "":
     #- "":
        # widget:
         #    type: coinmarketcap
          #   currency: PLN # Set the currency to Polish Zloty
           #  symbols: [BTC, ETH] # Example cryptocurrencies
-           # key: ${HOMEPAGE_VAR_COINMARKETCAP_API_KEY} # Your CoinMarketCap API key
+           # key: 1a310ffd-5ad9-48ee-85be-528e8342ca23
    # - "":
    #     widget:
    #         type: calendar
@@ -41,11 +41,11 @@
         icon: pi-hole.svg
         href:  "{{HOMEPAGE_VAR_PIHOLE_URL_2}}" 
         description: dns
-        siteMonitor: "{{HOMEPAGE_VAR_PIHOLE_URL_1}}"
+        siteMonitor: "{{HOMEPAGE_VAR_PIHOLE_URL}}"
         statusStyle: 'dot'  
         widget:
             type: pihole
-            url:  "http://pihole.kcn.lan/" 
+            url:  "{{HOMEPAGE_VAR_PIHOLE_URL}}"
             version: 6 # required if running v6 or higher, defaults to 5
             key:  "{{HOMEPAGE_VAR_PIHOLE_API_KEY_1}}"  
     - Uptime Kuma:
@@ -60,14 +60,26 @@
         #   slug: kcn
     - Nginx:
         icon: nginx-proxy-manager.svg
-        href: "{{HOMEPAGE_VAR_NGINX_URL}}"
+        href: "{{HOMEPAGE_VAR_NGINX_URL_2}}"
         description: proxy manager
         siteMonitor: "{{HOMEPAGE_VAR_NGINX_URL}}"
         statusStyle: 'dot'
+    - Duplicati:
+        icon: duplicati
+        href: "{{HOMEPAGE_VAR_DUPLICATI_URL_2}}"
+        description: backup client
+        ping: "{{HOMEPAGE_VAR_DUPLICATI_URL}}"
+        statusStyle: 'dot'
+    - Semaphore:
+        icon: semaphore
+        href: "{{HOMEPAGE_VAR_SEMAPHORE_URL_2}}"
+        description: ansible
+        ping: "{{HOMEPAGE_VAR_SEMAPHORE_URL}}"
+        statusStyle: 'dot'    
 - Media:
      - Trilium:
          icon: trilium
-         href: "{{HOMEPAGE_VAR_TRILIUM_URL}}"
+         href: "{{HOMEPAGE_VAR_TRILIUM_URL_2}}"
          description: notes
          ping: "{{HOMEPAGE_VAR_TRILIUM_URL}}"
          statusStyle: 'dot'
@@ -77,13 +89,13 @@
         #    key: "{{HOMEPAGE_VAR_TRILIUM_KEY}}"
      - Gitea:
          icon: gitea
-         href: "{{HOMEPAGE_VAR_GITEA_URL}}"
+         href: "{{HOMEPAGE_VAR_GITEA_URL_2}}"
          description: git
          ping: "{{HOMEPAGE_VAR_GITEA_URL}}"
          statusStyle: 'dot'
      - qBittorrent:
          icon: qbittorrent.svg
-         href: "{{HOMEPAGE_VAR_QBITT_URL}}"
+         href: "{{HOMEPAGE_VAR_QBITT_URL_2}}"
          description: torrent client
          ping: "{{HOMEPAGE_VAR_QBITT_URL}}"
          statusStyle: 'dot'
@@ -93,6 +105,12 @@
              url: "{{HOMEPAGE_VAR_QBITT_URL}}"
              username: "{{HOMEPAGE_VAR_QBITT_USERNAME}}"
              password: "{{HOMEPAGE_VAR_QBITT_PASSWORD}}"
+     - Mealie:
+         icon: mealie
+         href: "{{HOMEPAGE_VAR_MEALIE_URL_2}}"
+         description: recipe manager
+         ping: "{{HOMEPAGE_VAR_MEALIE_URL}}"
+         statusStyle: 'dot'
 
 
      #- Jellyfin:
@@ -139,16 +157,16 @@
     
     - Kamera:
         icon: /icons/camera2.png
-        href: "{{HOMEPAGE_VAR_CAMERA_URL}}"
+        href: "{{HOMEPAGE_VAR_CAMERA_URL_2}}"
         description: HikVision
         ping: "{{HOMEPAGE_VAR_CAMERA_URL}}"
 
 - "| kCn ~":
-    - kcn333.pl:
+    - kcn333.com:
         icon: /icons/www2.svg
-        href: https://kcn333.pl/
+        href: https://kcn333.com/
        # description: Homepage
-        ping: https://kcn333.pl/
+        ping: https://kcn333.com/
         #statusStyle: 'dot' 
     - gitHub:
         icon: /icons/github.svg
@@ -157,8 +175,8 @@
         #statusStyle: 'dot'
     - nextCloud:
         icon: nextcloud #owncloud.svg
-        href: ${HOMEPAGE_VAR_CLOUD_URL}
-        ping: ${HOMEPAGE_VAR_CLOUD_URL}
+        href: https://nextcloud.kcn333.com/apps/dashboard/
+        ping: https://nextcloud.kcn333.com/
         #statusStyle: 'dot'
     - cloudFlare:
         icon: cloudflare.svg
