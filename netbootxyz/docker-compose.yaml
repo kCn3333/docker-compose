@@ -1,0 +1,17 @@
+version: '3.9'
+
+services:
+  netbootxyz:
+    image: ghcr.io/netbootxyz/netbootxyz
+    container_name: netbootxyz
+
+    network_mode: "host" 
+    
+    environment:
+      - NGINX_PORT=${NGINX_PORT} 
+      - WEB_APP_PORT=${WEB_APP_PORT}    
+    volumes:
+      - /home/kcn/docker/netbootxyz/config:/config 
+      - /home/kcn/docker/netbootxyz/assets:/assets 
+
+    restart: unless-stopped

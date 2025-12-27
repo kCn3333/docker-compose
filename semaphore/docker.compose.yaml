@@ -1,0 +1,17 @@
+services:
+  semaphore:
+    image: public.ecr.aws/semaphore/pro/server:latest
+    container_name: semaphore
+    environment:
+      SEMAPHORE_DB_DIALECT: sqlite
+      SEMAPHORE_ADMIN: admin
+      SEMAPHORE_ADMIN_PASSWORD: ${ADMIN_PASSWORD}
+      SEMAPHORE_ADMIN_NAME: Admin
+      SEMAPHORE_ADMIN_EMAIL: admin@localhost
+      SEMAPHORE_PORT: 3030
+    volumes:
+      - /home/kcn/docker/semaphore/data:/var/lib/semaphore
+      - /home/kcn/docker/semaphore/config:/etc/semaphore
+      - /home/kcn/docker/semaphore/tmp:/tmp/semaphore
+    restart: unless-stopped
+    network_mode: host
