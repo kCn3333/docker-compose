@@ -1,0 +1,26 @@
+services:
+  homeassistant:
+    container_name: homeassistant
+    image: "ghcr.io/home-assistant/home-assistant:stable"
+    volumes:
+      - /home/kcn/docker/homeassistant:/config
+      - /etc/localtime:/etc/localtime:ro
+    devices:
+      # ls /dev/serial/by-id/
+      - /dev/serial/by-id/usb-Itead_Sonoff_Zigbee_3.0_USB_Dongle_Plus_V2_xxxxxxxxxxxxxxxxxxxx:/dev/zigbee
+    restart: unless-stopped
+    network_mode: host
+    environment:
+      TZ: Europe/Warsaw
+
+  esphome:
+    container_name: esphome
+    image: ghcr.io/esphome/esphome:stable
+    restart: unless-stopped
+    ports:
+      - "6052:6052"
+    volumes:
+      - /home/kcn/docker/esphome:/config
+      - /etc/localtime:/etc/localtime:ro
+    environment:
+      - TZ=Europe/Warsaw
