@@ -1,0 +1,15 @@
+services:
+  haproxy:
+    image: haproxy:latest
+    container_name: haproxy
+    restart: unless-stopped
+    ports: 
+      - "192.168.0.45:80:6480" 
+      - "192.168.0.45:443:6453"
+      - "192.168.0.45:6443:6443"
+    volumes:
+      - /home/kcn/k8s/haproxy/haproxy.cfg:/usr/local/etc/haproxy/haproxy.cfg:ro
+    logging:
+      options:
+        max-size: "10m"
+        max-file: "3"
