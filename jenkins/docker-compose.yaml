@@ -1,0 +1,17 @@
+services:
+  jenkins:
+    image: jenkins/jenkins:lts
+    container_name: jenkins
+    restart: unless-stopped
+
+    ports:
+      - "8888:8080"       # Web UI
+      - "50000:50000"     # Agent / JNLP port
+ 
+    environment:
+      - JENKINS_OPTS=--httpPort=8888
+      - TZ=Europe/Warsaw
+ 
+    volumes:
+      - /home/kcn/docker/jenkins/jenkins_home:/var/jenkins_home          # (jobs, config, plugins)
+ 
