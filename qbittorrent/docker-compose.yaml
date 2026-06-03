@@ -1,0 +1,23 @@
+services:
+  qbittorrent:
+    image: lscr.io/linuxserver/qbittorrent:latest
+    container_name: qbittorrent
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Etc/UTC
+      - WEBUI_PORT=8999
+      - TORRENTING_PORT=6881
+    volumes:
+      - /home/kcn/docker/qbittorrent/appdata:/config
+      - /media/kcn/media/torrents/download:/downloads
+      # Map the installer script to init directory
+      - /home/kcn/docker/qbittorrent/appdata/install-subliminal.sh:/custom-cont-init.d/install-subliminal.sh:ro
+      # Map the config file with credentials as read-only to user home dir
+      - /home/kcn/.config/subliminal/subliminal.toml:/config/.config/subliminal/subliminal.toml:ro
+    ports:
+      - 8999:8999
+      - 6881:6881
+      - 6881:6881/udp
+    stop_grace_period: "10s"
+    restart: unless-stopped
