@@ -12,6 +12,29 @@
     - "":
         description: "Debian GNU/Linux 13 (trixie) x86_64"
         ping: 192.168.0.46
+
+    - Home Assistant:
+        icon: home-assistant.png
+        href: "{{HOMEPAGE_VAR_HOMEASSISTANT_URL}}"
+        #description: Smart Home
+        ping: "{{HOMEPAGE_VAR_HOMEASSISTANT_URL}}"
+        statusStyle: 'dot'
+        widget:
+          type: homeassistant
+          url: "{{HOMEPAGE_VAR_HOMEASSISTANT_URL}}"
+          key: "{{HOMEPAGE_VAR_HOMEASSISTANT_KEY}}"
+          custom:
+            - template: "{{ (states('sensor.energy_monitor_switch_moc') | float(0) + states('sensor.energy_monitor_switch_2_moc') | float(0) + states('sensor.energy_monitor_switch_3_moc') | float(0)) | round(1) }} W"
+              label: "Zużycie prądu"
+            - state: sensor.temp2_indoor_temperatura
+              label: "Temp dom"
+            - template: "{{ states('sensor.rack_fan_controller_03_temp_max') | float(0) | round(2) }} °C"
+              label: "Temp rack"
+            - template: "{{ 'ON' if states('fan.rack_fan_controller_40_fan_top') == 'on' else 'OFF' }}"
+              label: "Wentylatory"    
+
+
+
     #- "":
     #- "":
        # widget:
@@ -23,7 +46,7 @@
    #     widget:
    #         type: calendar
 
-- Usługi:    
+- Usługi:
     - Portainer:
         icon: portainer #portainer.svg
         href:  "{{HOMEPAGE_VAR_PORTAINER_URL}}" 
@@ -46,12 +69,12 @@
         widget:
             type: pihole
             url:  "{{HOMEPAGE_VAR_PIHOLE_URL}}"
-            version: 6 # required if running v6 or higher, defaults to 5
+            version: 6                              # required if running v6 or higher, defaults to 5
             key:  "{{HOMEPAGE_VAR_PIHOLE_API_KEY_1}}"  
     - Uptime Kuma:
         icon: uptime-kuma.svg
         href:  "{{HOMEPAGE_VAR_UPTIME_KUMA_URL_2}}" 
-        description: status serwera
+        description: server monitor
         siteMonitor: "{{HOMEPAGE_VAR_UPTIME_KUMA_URL}}"
         statusStyle: 'dot'
         #widget:
@@ -70,13 +93,58 @@
         description: backup client
         ping: "{{HOMEPAGE_VAR_DUPLICATI_URL}}"
         statusStyle: 'dot'
+    - ntfy:
+        icon: ntfy.png
+        href: "{{HOMEPAGE_VAR_NTFY_URL}}"
+        description: server notifications
+        ping: "{{HOMEPAGE_VAR_NTFY_URL}}"
+        statusStyle: 'dot'
+        # widget:
+         #  url: "{{HOMEPAGE_VAR_NTFY_URL}}"
+         #   topic: "{{HOMEPAGE_VAR_NTFY_TOPIC}}"  
+         #   fields: ["message", "lastReceived"]
+         #   username: "{{HOMEPAGE_VAR_NTFY_USERNAME}}" 
+         #   password: "{{HOMEPAGE_VAR_NTFY_PASSWORD}}"
     - Semaphore:
         icon: semaphore
         href: "{{HOMEPAGE_VAR_SEMAPHORE_URL_2}}"
         description: ansible
         ping: "{{HOMEPAGE_VAR_SEMAPHORE_URL}}"
-        statusStyle: 'dot'    
+        statusStyle: 'dot'
+    - Gitea:
+         icon: gitea
+         href: "{{HOMEPAGE_VAR_GITEA_URL_2}}"
+         description: git
+         ping: "{{HOMEPAGE_VAR_GITEA_URL}}"
+         statusStyle: 'dot'
+
+#- Smart Home:
+
 - Media:
+     - Immich:
+         icon: immich
+         href: "{{HOMEPAGE_VAR_IMMICH_URL}}"
+         description: photo library
+         ping: "{{HOMEPAGE_VAR_IMMICH_URL}}"
+         statusStyle: 'dot'
+         widget:
+            type: immich
+            url: "{{HOMEPAGE_VAR_IMMICH_URL}}"
+            key: "{{HOMEPAGE_VAR_IMMICH_API_KEY}}"
+            version: 2                                  # for Immich >= v1.118
+            fields: ["photos", "videos", "storage"]
+     - qBittorrent:
+         icon: qbittorrent.svg
+         href: "{{HOMEPAGE_VAR_QBITT_URL_2}}"
+         description: torrent client
+         ping: "{{HOMEPAGE_VAR_QBITT_URL_2}}"
+         statusStyle: 'dot'
+         widget:
+             type: qbittorrent
+             hideErrors: true
+             url: "{{HOMEPAGE_VAR_QBITT_URL_2}}"
+             username: "{{HOMEPAGE_VAR_QBITT_USERNAME}}"
+             password: "{{HOMEPAGE_VAR_QBITT_PASSWORD}}"
      - Trilium:
          icon: trilium
          href: "{{HOMEPAGE_VAR_TRILIUM_URL_2}}"
@@ -87,30 +155,14 @@
         #    type: trilium
         #    url: "{{HOMEPAGE_VAR_TRILIUM_URL}}"
         #    key: "{{HOMEPAGE_VAR_TRILIUM_KEY}}"
-     - Gitea:
-         icon: gitea
-         href: "{{HOMEPAGE_VAR_GITEA_URL_2}}"
-         description: git
-         ping: "{{HOMEPAGE_VAR_GITEA_URL}}"
-         statusStyle: 'dot'
-     - qBittorrent:
-         icon: qbittorrent.svg
-         href: "{{HOMEPAGE_VAR_QBITT_URL_2}}"
-         description: torrent client
-         ping: "{{HOMEPAGE_VAR_QBITT_URL}}"
-         statusStyle: 'dot'
-         widget:
-             type: qbittorrent
-             hideErrors: true
-             url: "{{HOMEPAGE_VAR_QBITT_URL}}"
-             username: "{{HOMEPAGE_VAR_QBITT_USERNAME}}"
-             password: "{{HOMEPAGE_VAR_QBITT_PASSWORD}}"
+
      - Mealie:
          icon: mealie
          href: "{{HOMEPAGE_VAR_MEALIE_URL_2}}"
          description: recipe manager
          ping: "{{HOMEPAGE_VAR_MEALIE_URL}}"
          statusStyle: 'dot'
+
 
 
      #- Jellyfin:
