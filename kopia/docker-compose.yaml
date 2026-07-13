@@ -1,0 +1,39 @@
+services:
+  kopia:
+    image: kopia/kopia:latest
+    container_name: kopia
+    restart: unless-stopped
+    ports:
+      - "51515:51515"
+    volumes:
+      - kopia-config:/app/config
+      - kopia-cache:/app/cache
+      - kopia-logs:/app/logs
+ 
+
+      - /home:/data/home:ro
+      - /etc/wireguard:/data/wireguard:ro
+ 
+      # local backup repository (mounted as /repository/local in the container)
+      - /mnt/backups:/repository/local
+ 
+      # rclone config (for Mega.nz)
+      - /root/.config/rclone:/app/.config/rclone:ro
+ 
+    environment:
+      TZ: Europe/Warsaw
+      KOPIA_PASSWORD: "${KOPIA_REPO_PASSWORD}"
+ 
+    command:
+      - server
+      - start
+      - --address=0.0.0.0:51515
+      - --server-username=admin
+      - --server-password=${KOPIA_UI_PASSWORD}
+      - --insecure
+ 
+volumes:
+  kopia-config:
+  kopia-cache:
+  kopia-logs:
+ 
