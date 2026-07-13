@@ -2,17 +2,19 @@ services:
   homepage:
     image: ghcr.io/gethomepage/homepage:latest
     container_name: homepage
+
     ports:
       - 3000:3000
     env_file: stack.env  # use .env
     environment:
       PUID: $PUID   # read them from .env
       PGID: $PGID   # read them from .env
-      HOMEPAGE_ALLOWED_HOSTS: home.kcn.lan
+      HOMEPAGE_ALLOWED_HOSTS: home.local.kcn333.com
+
 
     volumes:
-      - /home/kcn/docker/homepage/config:/app/config               # Make sure your local config directory exists
-      - /home/kcn/docker/homepage/images:/app/public/images        # for background image
-      - /home/kcn/docker/homepage/icons:/app/public/icons          # for some icons
-      - /var/run/docker.sock:/var/run/docker.sock:ro        # optional, for docker integrations
+      - /home/kcn/docker/homepage/config:/app/config              # Make sure your local config directory exists
+      - /home/kcn/docker/homepage/images:/app/public/images       # for background image
+      - /home/kcn/docker/homepage/icons:/app/public/icons         # for some icons
+      - /var/run/docker.sock:/var/run/docker.sock:ro              # optional, for docker integrations
     restart: unless-stopped
