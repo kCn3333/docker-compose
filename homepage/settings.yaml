@@ -16,7 +16,7 @@ background:
   opacity: 30 # 0-100
 
 providers:
-  openweathermap: "{{HOMEPAGE_VAR_OPENWEATHERMAP_KEY}}"
+  openweathermap: "{{HOMEPAGE_VAR_OPENWEATHER_API_KEY}}"
   #weatherapi: weatherapiapikey
 
 hideVersion: true
@@ -27,8 +27,11 @@ showStats: true
 layout:
   home.serwer:
     icon: linux #/icons/debian.gif
-    style: column
+    style: row
     columns: 2
+  #Smart Home:
+   # style: row
+   # columns: 2
   Usługi:
     style: row
     columns: 2

@@ -9,14 +9,24 @@
 #    widget:
 #        type: calendar
 - home.serwer:
-    - "":
-        description: "Debian GNU/Linux 13 (trixie) x86_64"
-        ping: 192.168.0.46
+
+    - Proxmox:
+        icon: proxmox.svg
+        href: "{{HOMEPAGE_VAR_PROXMOX_URL_2}}"
+        description: hypervisor
+        ping: "{{HOMEPAGE_VAR_PROXMOX_URL_2}}"
+        statusStyle: 'dot'
+        widget:
+            type: proxmox
+            url: "{{HOMEPAGE_VAR_PROXMOX_URL_2}}"
+            username: "{{HOMEPAGE_VAR_PROXMOX_USER}}"
+            password: "{{HOMEPAGE_VAR_PROXMOX_TOKEN}}"
+            node: zion
 
     - Home Assistant:
         icon: home-assistant.png
         href: "{{HOMEPAGE_VAR_HOMEASSISTANT_URL}}"
-        #description: Smart Home
+        description: smart home
         ping: "{{HOMEPAGE_VAR_HOMEASSISTANT_URL}}"
         statusStyle: 'dot'
         widget:
@@ -28,7 +38,7 @@
               label: "Zużycie prądu"
             - state: sensor.temp2_indoor_temperatura
               label: "Temp dom"
-            - template: "{{ states('sensor.rack_fan_controller_03_temp_max') | float(0) | round(2) }} °C"
+            - template: "{{ states('sensor.serwerownia_rack_fan_controller_01_temp_top') | float(0) | round(2) }} °C"
               label: "Temp rack"
             - template: "{{ 'ON' if states('fan.rack_fan_controller_40_fan_top') == 'on' else 'OFF' }}"
               label: "Wentylatory"    
@@ -58,19 +68,20 @@
         widget:
             type: portainer
             url:  "{{HOMEPAGE_VAR_PORTAINER_URL}}" 
-            env: 2
+            env: 3
             key:  "{{HOMEPAGE_VAR_PORTAINER_API_KEY}}" 
-    - piHole:
-        icon: pi-hole.svg
-        href:  "{{HOMEPAGE_VAR_PIHOLE_URL_2}}" 
+    - AdGuard:
+        icon: adguard-home.svg
+        href: "{{HOMEPAGE_VAR_ADGUARD_URL_2}}"
         description: dns
-        siteMonitor: "{{HOMEPAGE_VAR_PIHOLE_URL}}"
-        statusStyle: 'dot'  
+        siteMonitor: "{{HOMEPAGE_VAR_ADGUARD_URL}}"
+        statusStyle: 'dot'
         widget:
-            type: pihole
-            url:  "{{HOMEPAGE_VAR_PIHOLE_URL}}"
-            version: 6                              # required if running v6 or higher, defaults to 5
-            key:  "{{HOMEPAGE_VAR_PIHOLE_API_KEY_1}}"  
+            type: adguard
+            url: "{{HOMEPAGE_VAR_ADGUARD_URL}}"
+            username: "{{HOMEPAGE_VAR_ADGUARD_USERNAME}}"
+            password: "{{HOMEPAGE_VAR_ADGUARD_PASSWORD}}"
+ 
     - Uptime Kuma:
         icon: uptime-kuma.svg
         href:  "{{HOMEPAGE_VAR_UPTIME_KUMA_URL_2}}" 
@@ -81,12 +92,16 @@
         #   type: uptimekuma
         #   url:  "{{HOMEPAGE_VAR_UPTIME_KUMA_URL}}"
         #   slug: kcn
-    - Nginx:
-        icon: nginx-proxy-manager.svg
-        href: "{{HOMEPAGE_VAR_NGINX_URL_2}}"
-        description: proxy manager
-        siteMonitor: "{{HOMEPAGE_VAR_NGINX_URL}}"
+    - Caddy:
+        icon: caddy.svg
+        href: "{{HOMEPAGE_VAR_CADDY_URL_2}}"
+        description: reverse proxy
+        siteMonitor: "{{HOMEPAGE_VAR_CADDY_URL_2}}"
         statusStyle: 'dot'
+        allowInsecure: true
+#        widget:
+ #           type: caddy
+  #          url: "{{HOMEPAGE_VAR_CADDY_URL}}"
     - Duplicati:
         icon: duplicati
         href: "{{HOMEPAGE_VAR_DUPLICATI_URL_2}}"
@@ -118,9 +133,34 @@
          ping: "{{HOMEPAGE_VAR_GITEA_URL}}"
          statusStyle: 'dot'
 
-#- Smart Home:
-
 - Media:
+
+     - Jellyfin:
+        icon: jellyfin.svg
+        href: "{{HOMEPAGE_VAR_JELLYFIN_URL_2}}"
+        description: media center
+        ping: "{{HOMEPAGE_VAR_JELLYFIN_URL_2}}"
+        statusStyle: 'dot'
+        widget:
+            type: jellyfin
+            url: "{{HOMEPAGE_VAR_JELLYFIN_URL}}"
+            key: "{{HOMEPAGE_VAR_JELLYFIN_API_KEY}}"
+            enableBlocks: true
+            enableNowPlaying: true
+            fields: ["movies", "series", "episodes"]
+
+     - Jellyseerr:
+        icon: jellyseerr.png
+        href: "{{HOMEPAGE_VAR_JELLYSEERR_URL}}"
+        description: media requests
+        ping: "{{HOMEPAGE_VAR_JELLYSEERR_URL}}"
+        statusStyle: 'dot'
+        widget:
+            type: jellyseerr
+            url: "{{HOMEPAGE_VAR_JELLYSEERR_URL}}"
+            key: "{{HOMEPAGE_VAR_JELLYSEERR_API_KEY}}"
+            fields: ["pending", "approved", "available", "completed", "processing"]
+
      - Immich:
          icon: immich
          href: "{{HOMEPAGE_VAR_IMMICH_URL}}"
@@ -131,18 +171,18 @@
             type: immich
             url: "{{HOMEPAGE_VAR_IMMICH_URL}}"
             key: "{{HOMEPAGE_VAR_IMMICH_API_KEY}}"
-            version: 2                                  # for Immich >= v1.118
+            version: 2 
             fields: ["photos", "videos", "storage"]
      - qBittorrent:
          icon: qbittorrent.svg
-         href: "{{HOMEPAGE_VAR_QBITT_URL_2}}"
+         href: "{{HOMEPAGE_VAR_QBITT_URL}}"
          description: torrent client
-         ping: "{{HOMEPAGE_VAR_QBITT_URL_2}}"
+         ping: "{{HOMEPAGE_VAR_QBITT_URL}}"
          statusStyle: 'dot'
          widget:
              type: qbittorrent
              hideErrors: true
-             url: "{{HOMEPAGE_VAR_QBITT_URL_2}}"
+             url: "{{HOMEPAGE_VAR_QBITT_URL}}"
              username: "{{HOMEPAGE_VAR_QBITT_USERNAME}}"
              password: "{{HOMEPAGE_VAR_QBITT_PASSWORD}}"
      - Trilium:
@@ -162,22 +202,6 @@
          description: recipe manager
          ping: "{{HOMEPAGE_VAR_MEALIE_URL}}"
          statusStyle: 'dot'
-
-
-
-     #- Jellyfin:
-       # icon: jellyfin.svg
-       # href: "{{HOMEPAGE_VAR_JELLYFIN_URL}}"
-        #disciption: media center
-        #ping: "{{HOMEPAGE_VAR_JELLYFIN_URL}}"
-        #statusStyle: 'dot'
-        #widget: 
-         #   hideErrors: true
-         #   type: jellyfin
-         #   url: "{{HOMEPAGE_VAR_JELLYFIN_URL}}"
-         #   key:
-         #   enableBlocks: true # optional, defaults to false
-         #   enableNowPlaying: true # optional, defaults to true
              
 - Sieć:
     - UniFi Network:
